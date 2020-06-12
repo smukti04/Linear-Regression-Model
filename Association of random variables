@@ -1,0 +1,22 @@
+#Association between two random variables
+import pandas as pd
+import matplotlib.pyplot as plt
+% matplotlib inline
+
+# Import the housing information for analysis 
+housing = pd.DataFrame.from_csv('../data/housing.csv', index_col=0)
+housing.head()
+
+LSTAT	INDUS	NOX	RM	MEDV
+0	4.98	2.31	0.538	6.575	24.0
+1	9.14	7.07	0.469	6.421	21.6
+2	4.03	7.07	0.469	7.185	34.7
+3	2.94	2.18	0.458	6.998	33.4
+4	5.33	2.18	0.458	7.147	36.2
+
+LSTAT = low status population
+Indus = proportion of non-retail business acres per town
+NOX = nitric oxide concentration
+RM = average number of rows
+MEDV = Median value of homes
+
