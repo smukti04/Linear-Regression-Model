@@ -1,0 +1,52 @@
+Simple linear regression model
+
+import pandas as pd
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+% matplotlib inline
+
+
+Simple linear regression
+yi=β0+β1∗xi+ϵi
+
+Let's use python in estimating the values of B0 and B1 (intercept and slope)
+# lets try to guess what are the real values of intercept and slope
+# we call our guess b0, b1...
+# Try to assign the value of b0, b1 to get a straight line that can describe our data 
+b0 = 0.1
+b1 = 1
+housing['GuessResponse'] = b0 + b1*housing['RM']
+
+# Also want to know the error of of guess...
+# This show how far is our guess response from the true response
+housing['observederror'] = housing['MEDV'] - housing['GuessResponse']
+
+
+# plot your estimated line together with the points
+plt.figure(figsize=(10, 10))
+plt.title('Sum of sqaured error is {}'.format((((housing['observederror'])**2)).sum()))
+plt.scatter(housing['RM'], housing['MEDV'], color='g', label='Observed')
+plt.plot(housing['RM'], housing['GuessResponse'], color='red', label='GuessResponse')
+plt.legend()
+plt.xlim(housing['RM'].min()-2, housing['RM'].max()+2)
+plt.ylim(housing['MEDV'].min()-2, housing['MEDV'].max()+2)
+plt.show()
+
+
+
+# Least sqaure estimates
+# Estimate model parameters with statsmodel
+import statsmodel.formula.api as smf
+model = smf.ols(formula=formula, data=housing).fit()
+
+# Here are estimated intercept and slope by least square estimation
+# Attribute 'params' returns a list of estimated parameters form model
+b0_ols = model.params[0]
+b1_ols = model.params[1]
+
+housing['BestResponse'] = b0_ols + b1_ols*housing['RM']
+
+
+Summary table
+#Refer to the P-value of RM, Confidence Interval and R-square to evaluate the performance.
+model.summary()
