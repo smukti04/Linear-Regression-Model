@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 % matplotlib inline
 
-# Import the housing information for analysis 
+# Import the housing information for analysis (Housing price in Boston)
 housing = pd.DataFrame.from_csv('../data/housing.csv', index_col=0)
 housing.head()
 
@@ -14,9 +14,20 @@ LSTAT	INDUS	NOX	RM	MEDV
 3	2.94	2.18	0.458	6.998	33.4
 4	5.33	2.18	0.458	7.147	36.2
 
-LSTAT = low status population
+LSTAT = proportion of low status population
 Indus = proportion of non-retail business acres per town
 NOX = nitric oxide concentration
-RM = average number of rows
+RM = average number of rooms per dwelling
 MEDV = Median value of homes
+
+# Use covariance to calculate the association
+housing.cov()
+
+# Use correlation to calculate the association is more appropriate in this case
+housing.corr()
+
+#visualize the association between two variables
+# scatter matrix plot
+from pandas.tools.plotting import scatter_matrix
+sm = scatter_matrix(housing, figsize=(10, 10))
 
